@@ -19,4 +19,4 @@ elif [[ $INPUT_URL =~ ^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$ ]];
 fi
 
 printf "PREPARING TO STREAM \n"
-ffmpeg -i $INPUT_URL -preset $PRESET -tune zerolatency -f flv -c:v libx264 -c:a aac -r 30 -crf $CRF -vf "scale=-1:1080" $SERVER_URL$STREAM_KEY
+ffmpeg -headers $'Referer: https://noob4cast.com' -i $INPUT_URL -i logo.png -filter_complex "overlay=main_w-overlay_w-5:25" -preset "ultrafast" -tune zerolatency -c:v libx264 -c:a aac -r 30 -crf $CRF -f flv $SERVER_URL$STREAM_KEY
